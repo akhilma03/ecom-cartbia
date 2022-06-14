@@ -1,0 +1,61 @@
+def loginPage(request):
+    
+    if request.user.is_authenticated:
+        return redirect('home')
+    
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        
+        if email == '' and password == '':
+            messages.error(request, "Please provide an email and password")
+        elif password == '':
+            messages.error(request, "Please provide password")
+        elif email == '':
+            messages.error(request, "Please provide an email")
+        else:
+            try:
+                user = Account.objects.get(email=email)
+            except:
+                messages.error(request, "user does not exist")
+                
+        user = authenticate(email=email, password=password)
+        print(user)
+        
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, "email or password does not match")
+            
+    return render(request,'users/login.html')
+
+
+
+def registerPage(request):
+    form = RegistrationForm()
+    
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        
+        if form.is_valid():
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            email = form.cleaned_data['email']
+            gender = form.cleaned_data['gender']
+            mobile = form.cleaned_data['mobile']
+            password = form.cleaned_data['password']
+            
+            if Account.objects.filter(email=email).exists() :
+                messages.error(request, 'Email already registered.')
+            else :
+                user = Account.objects.create_user(
+                first_name=first_name, last_name=last_name, email=email, gender=gender, mobile=mobile, password=password)
+                user.save()
+                request.session['mobile']=mobile
+                send_otp(mobile)
+            return redirect('register-otp')
+            
+    form=RegistrationForm()
+    context = {'form': form}
+    return render(request, 'users/sign-up.html', context)
