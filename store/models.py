@@ -6,6 +6,9 @@ from tkinter import CASCADE, image_names
 from unicodedata import category
 from django.db import models
 from django.forms import SlugField
+from accounts.models import Account
+
+
 
 # Create your models here.
 class Category(models.Model):
@@ -105,9 +108,10 @@ class Cart(models.Model):
         return self.cart_id
 
 class Cartitems(models.Model):
+    user = models.ForeignKey(Account,on_delete=models.CASCADE,null=True)
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
     variations = models.ManyToManyField(Variation,blank=True)
-    cart = models.ForeignKey(Cart,on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart,on_delete=models.CASCADE,null=True)
     quantity = models.IntegerField()
     is_active = models.BooleanField(default=True)
 
