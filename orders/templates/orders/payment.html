@@ -1,0 +1,350 @@
+<!doctype html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Cartbia Payment</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
+
+
+        body {
+            background-color: #f5eee7;
+            font-family: "Poppins", sans-serif;
+            font-weight: 300;
+        }
+
+        .container {
+
+            height: 100vh;
+
+        }
+
+        .card {
+
+            border: none;
+        }
+
+        .card-header {
+            padding: .5rem 1rem;
+            margin-bottom: 0;
+            background-color: rgba(0, 0, 0, .03);
+            border-bottom: none;
+        }
+
+        .btn-light:focus {
+            color: #212529;
+            background-color: #e2e6ea;
+            border-color: #dae0e5;
+            box-shadow: 0 0 0 0.2rem rgba(216, 217, 219, .5);
+        }
+
+        .form-control {
+
+            height: 50px;
+            border: 2px solid #eee;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .form-control:focus {
+            color: #495057;
+            background-color: #fff;
+            border-color: #039be5;
+            outline: 0;
+            box-shadow: none;
+
+        }
+
+        .input {
+
+            position: relative;
+        }
+
+        .input i {
+
+            position: absolute;
+            top: 16px;
+            left: 11px;
+            color: #989898;
+        }
+
+        .input input {
+
+            text-indent: 25px;
+        }
+
+        .card-text {
+
+            font-size: 13px;
+            margin-left: 6px;
+        }
+
+        .certificate-text {
+
+            font-size: 12px;
+        }
+
+
+        .billing {
+            font-size: 11px;
+        }
+
+        .super-price {
+
+            top: 0px;
+            font-size: 22px;
+        }
+
+        .super-month {
+
+            font-size: 11px;
+        }
+
+
+        .line {
+            color: #bfbdbd;
+        }
+
+        .free-button {
+
+            background: #1565c0;
+            height: 52px;
+            font-size: 15px;
+            border-radius: 8px;
+        }
+
+
+        .payment-card-body {
+
+            flex: 1 1 auto;
+            padding: 24px 1rem !important;
+
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container d-flex justify-content-center mt-5 mb-5">
+
+
+
+        <div class="row g-3">
+
+            <div class="col-md-6">
+
+                <span>Payment Method</span>
+                
+                <div class="card">
+
+                    <div class="accordion" id="accordionExample">
+
+                        <div class="card">
+                            <div class="card-header p-0" id="headingTwo">
+                                <h2 class="mb-0">
+                                    <button
+                                        class="btn btn-light btn-block text-left collapsed p-3 rounded-0 border-bottom-custom"
+                                        type="button" data-toggle="collapse" data-target="#collapseTwo"
+                                        aria-expanded="false" aria-controls="collapseTwo">
+                                        <div class="d-flex align-items-center justify-content-between">
+
+                                            <span>Paypal</span>
+                                            <img src="https://i.imgur.com/7kQEsHU.png" width="30">
+
+                                        </div>
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <input type="text" class="form-control" placeholder="Paypal email">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header p-0">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-light btn-block text-left p-3 rounded-0"
+                                        data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                        aria-controls="collapseOne">
+                                        <div class="d-flex align-items-center justify-content-between">
+
+                                            <span>Credit card</span>
+                                            <div class="icons">
+                                                <img src="https://i.imgur.com/2ISgYja.png" width="30">
+                                                <img src="https://i.imgur.com/W1vtnOV.png" width="30">
+                                                <img src="https://i.imgur.com/35tC99g.png" width="30">
+                                                <img src="https://i.imgur.com/2ISgYja.png" width="30">
+                                            </div>
+
+                                        </div>
+                                    </button>
+                                </h2>
+                            </div>
+
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <div class="card-body payment-card-body">
+
+                                    <div class="card">
+                                        <span class="font-weight-normal card-text">Billing Address</span>
+                                        <div class="card-body">
+                                          <h5>  <p class="card-text"> <b>{{address.full_name}} </b> </p>
+                                            <p class="card-text"> {{address.address}}
+                                                {{address.city}},{{address.state}},{{address.country}},{{address.pincode}} <br> Mob {{address.phone}}
+                                            </p></h5>
+
+                                        </div>
+
+                                            <hr>
+
+                                    </div>
+                                    <!-- <span class="font-weight-normal card-text">Billing Address</span> -->
+                                    <div class="input">
+
+                                        <h6 class="order__title">Product Review</h6>
+                                        <div class="checkout__order__products"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;Product <span> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quantity
+                                            </span> <span>
+                                            </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            Total</span></div>
+                    
+                                        <ul class="checkout__total__products">
+                                            {% for cart_item in cart_items %}
+                                            <li class="text">{{cart_item.product.product_name}}<span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{cart_item.quantity}} </span>
+                                                <span> </span>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                ₹ {{ cart_item.sub_total }} </span>
+                                            </li>
+                    
+                                            {% endfor %}
+                                        </ul>
+
+
+
+                                    </div>
+
+                                  
+
+                                    <span class="text-muted certificate-text"><i class="fa fa-lock"></i> 
+                                        Get in Love with Cartbia </span>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+                <span>Summary</span>
+
+                <div class="card">
+
+                    <div class="d-flex justify-content-between p-3">
+
+                        <div class="d-flex flex-column">
+
+                            <span>Total <i class="fa fa-caret-down"></i></span>
+                            <!-- <a href="#" class="billing">Save 20% with annual billing</a> -->
+
+                        </div>
+
+                        <div class="mt-1">
+                            <!-- <span>Refferal Bonouses</span> -->
+                            <span>{{total}}</span>
+                            
+                        </div>
+
+                    </div>
+
+                    <hr class="mt-0 line">
+
+                    <div class="p-3">
+
+                       
+
+                        <div class="d-flex justify-content-between">
+
+                            <span>Tax <i class="fa fa-clock-o"></i></span>
+                            <span>₹ {{tax}}</span>
+
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+
+                            <span>Grand Total</span>
+                            <span>₹ {{grand_total}}</span>
+
+                        </div>
+
+
+                    </div>
+
+                    <hr class="mt-0 line">
+
+
+                    <div class="p-3 d-flex justify-content-between">
+
+                        <div class="d-flex flex-column">
+
+                            <span>Today you pay(US Dollars)</span>
+                            <!-- <small>After 30 days $9.59</small> -->
+
+                        </div>
+                        <!-- <span>$0</span> -->
+
+
+
+                    </div>
+
+
+                    <div class="p-3">
+
+                        <button class="btn btn-dark btn-block ">Proceed to Pay </button>
+                        <div class="text-center">
+                            <!-- <a href="#">Have a promo code?</a> -->
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>

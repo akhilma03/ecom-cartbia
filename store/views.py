@@ -6,6 +6,8 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
+from orders.models import Order,Address
+from orders.forms import AddressForm
 
 
 def homei(request):
@@ -332,20 +334,47 @@ def cart(request, total=0, quantity=0, cart_items=None):
 
 @login_required(login_url='userlogin')
 def checkout(request, total=0, quantity=0, cart_items=None):
-    tax = 0
-    grand_total = 0
+    
     try:
-        if request.user.is_authenticated:
-            cart_items = Cartitems.objects.filter(
-                user=request.user, is_active=True)
+        tax = 0
+        grand_total = 0
+        address = None
+      
+            
+        if request.method == 'POST':
+            form = AddressForm(request.POST)    
+            if form.is_valid():
+                print("valid")
+                # Store all Billing information in Order Table
+                data = Address()   # getting instance
+                data.user= request.user
+                data.first_name = form.cleaned_data['first_name']
+                data.last_name = form.cleaned_data['last_name']
+                data.phone = form.cleaned_data['phone']
+                data.email = form.cleaned_data['email']
+                data.address_line1 = form.cleaned_data['address_line1']
+                data.address_line2 = form.cleaned_data['address_line2']
+                data.country = form.cleaned_data['country']
+                data.state = form.cleaned_data['state']
+                data.district = form.cleaned_data['district']
+                data.city = form.cleaned_data['city']
+                data.pincode = form.cleaned_data['pincode']   
+                data.save() 
+                return redirect('checkout')
+            else:
+                print("bnotvalid")
 
-        else:
-            cart = Cart.objects.get(cart_id=_cart_id(request))
-            cart_items = Cartitems.objects.filter(cart=cart, is_active=True)
+        
+        cart_items = Cartitems.objects.filter(user=request.user, is_active=True)
+        address = Address.objects.filter(user=request.user)
+       
         for cart_item in cart_items:
             total += (cart_item.product.price * cart_item.quantity)
             print(total)
             quantity += cart_item.quantity
+           
+          
+        
         tax = (3 * total)/100
         grand_total = total + tax
     except ObjectDoesNotExist:
@@ -357,6 +386,7 @@ def checkout(request, total=0, quantity=0, cart_items=None):
         'cart_items': cart_items,
         'tax': tax,
         'grand_total': grand_total,
+        'address':address,
 
     }
     return render(request, 'store/checkout.html', context)
