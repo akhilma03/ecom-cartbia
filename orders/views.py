@@ -1,11 +1,14 @@
 import razorpay
 from django.shortcuts import redirect, render
-from store.views import Cartitems
+from store.views import Cartitems,Product
 from .forms import AddressForm
-from .models import Address, Order, Payment
+from .models import Address, Order, OrderProduct, Payment
 import datetime
 from django.contrib import messages,auth
 from django.views.decorators.csrf import csrf_exempt
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+
 
 from http import client
 
@@ -105,6 +108,8 @@ def payment(request):
         pay.order_id = order_id
         pay.save()
 
+
+       
     context= {
         'payment':response_payment,
         'grand_total':paisa,
@@ -114,7 +119,6 @@ def payment(request):
 
     return render (request,'orders/razorpayment.html',context)
 
-@csrf_exempt
 def payment_status(request):
     print('annnaa')
     response = request.POST
@@ -141,8 +145,57 @@ def payment_status(request):
         print(order_number) 
         order=Order.objects.get(user=request.user,is_ordered=False,order_number=order_number) 
         order.payment=payment  
-        order.status='confirmed' 
+        order.status='Completed' 
+        order.is_ordered = True
         order.save()
+
+    #  # Move the cart item into order product table
+        cart_items = Cartitems.objects.filter(user=request.user)
+        print('hello')
+
+        for item in cart_items:
+            orderproduct = OrderProduct()
+            orderproduct.order_id = order.id
+            orderproduct.payment = payment
+            orderproduct.user_id =request.user.id
+            orderproduct.product_id = item.product_id
+            orderproduct.quantity = item.quantity
+            orderproduct.product_price= item.product.price
+            orderproduct.ordered = True
+            orderproduct.save()
+
+            # take cartitem by cart for the getting variation   
+
+            cart_item = Cartitems.objects.get(id=item.id)
+            product_variation = cart_item.variations.all()
+            orderproduct = OrderProduct.objects.get(id=orderproduct.id) # geting order product id from after saving 
+            orderproduct.variations.set(product_variation)
+            orderproduct.save()
+
+    #     #Reduced the quantity
+
+            product= Product.objects.get(id=item.product_id)
+            product.stock -= item.quantity
+            product.save()
+
+         
+    #     # clear cart
+        Cartitems.objects.filter(user=request.user).delete()
+
+    #     #Send Order recieved email to customer
+
+        mail_subject = 'Thank You For Shopping with us  '
+        message = render_to_string('orders/order_recieved.html', {
+            'user': request.user,
+            'order':order,
+            
+        })
+        to_email = request.user.email
+        send_email = EmailMessage(mail_subject, message, to=[to_email])
+        send_email.send()
+
+
+
         return render(request,'orders/payments_status.html',{'status':True})
     except:    
         return render(request,'orders/payments_status.html',{'status':False})    

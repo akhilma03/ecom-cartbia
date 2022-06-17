@@ -2,8 +2,32 @@ from django.contrib import admin
 from . models import Payment,Order,OrderProduct,Address
 
 # Register your models here.
-admin.site.register(Payment)
-admin.site.register(Order)
-admin.site.register(OrderProduct)
-admin.site.register(Address)
+
+
+
+
+class OrderAdmin(admin.ModelAdmin):
+    list_display = [ 'user','order_total','payment','status','is_ordered','created_at']
+    list_per_page: 20
+ 
+
+class PaymentAdmin(admin.ModelAdmin):
+    list_display = [ 'user','payment_id','amount_paid','created_at']
+    list_per_page: 20
+
+
+
+class OrderProductAdmin(admin.ModelAdmin):
+    list_display = [ 'order','payment','user','product','size','product_price','quantity','ordered']
+    list_per_page: 20
+    
+
+class AddressAdmin(admin.ModelAdmin):
+    list_display = [ 'user','first_name','last_name','phone','email','address_line1','country','state','pincode']
+    list_per_page: 20
+
+admin.site.register(Payment,PaymentAdmin)
+admin.site.register(Order,OrderAdmin)
+admin.site.register(OrderProduct,OrderProductAdmin)
+admin.site.register(Address,AddressAdmin)
 

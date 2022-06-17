@@ -8,17 +8,15 @@ from store.models import Product,Variation
 class Payment(models.Model):
     user    =  models.ForeignKey(Account,on_delete=models.CASCADE)
     payment_id =   models.CharField(max_length=100)
-    payment_method = models.CharField(max_length=100)
     order_id = models.CharField(max_length=100,blank=True)
-    payment_method_cod  = models.CharField(max_length=100,null=True)
     amount_paid     = models.CharField(max_length=100) #this is total amount paid
-    status = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
+    paid =models.BooleanField(default=False)
 
 
 
     def __str__(self):
-        return self.user.first_name
+        return self.payment_id
 class Address(models.Model):
     user = models.ForeignKey(Account,on_delete=models.CASCADE)
     first_name = models.CharField(max_length=50)
@@ -70,8 +68,8 @@ class OrderProduct(models.Model):
     payment = models.ForeignKey(Payment,on_delete=models.SET_NULL,blank=True,null=True)
     user = models.ForeignKey(Account,on_delete=models.CASCADE)
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
-    variation = models.ForeignKey(Variation,on_delete=models.CASCADE)
-    size = models.CharField(max_length=50)
+    variations = models.ManyToManyField(Variation,blank=True)
+    size = models.CharField(max_length=50,null=True)
     quantity = models.IntegerField()
     product_price = models.FloatField()
     ordered = models.BooleanField(default=False)
@@ -80,5 +78,5 @@ class OrderProduct(models.Model):
 
 
     def __str__(self):
-        return self.product_price
+        return self.user.first_name
 
