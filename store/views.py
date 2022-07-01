@@ -1,13 +1,14 @@
-
-from pickle import GET
 from django.shortcuts import get_object_or_404, render, redirect
-from . models import Cartitems, Category, Filter_Price, Product, Sub_Category, Cart, Variation
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from . models import Cartitems, Category, Product, Sub_Category, Cart, Variation,wishlist,ReviewRating,Filter_Price
+from django.core.paginator import Paginator
 from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
-from orders.models import Order,Address
+from orders.models import Address
 from orders.forms import AddressForm
+from django.contrib import messages
+from orders.models import Discount,Discount_coupon,OrderProduct
+from .forms import ReviewForm
 
 
 def homei(request):
@@ -33,6 +34,39 @@ def shop(request, category_slug=None, subcategory_slug=None):
         page = request.GET.get('page')
         paged_products = paginator.get_page(page)
         product_count = products.count()
+        if 'sorting' in request.POST:
+            if request.method == 'POST':
+                    sort_id = request.POST['sorting']
+
+                    if sort_id == 'low':
+                        product = Product.objects.filter(category=categories).order_by('price')
+                        count = product.count()
+                        paginator = Paginator(product,4)
+                        page = request.GET.get('page')
+                        paged_products = paginator.get_page(page)
+
+                    else:
+                        product = Product.objects.filter(category=categories).order_by('-price')
+                        count = product.count()
+                        paginator = Paginator(product,4)
+                        page = request.GET.get('page')
+                        paged_products = paginator.get_page(page)
+
+
+         #
+        if 'sorting' not in request.POST: 
+            if request.method ==  'POST':
+                print('212222222')
+                sort = request.POST['filtering']
+                key = Filter_Price.objects.get(name=sort)
+                a = key.pricerange_from
+                b=key.pricerange_to
+                products= Product.objects.filter(category=categories,price__range=(a,b))
+                paginator = Paginator(products, 4)
+                page = request.GET.get('page')
+                paged_products = paginator.get_page(page)
+
+
         if subcategory_slug != None:
             subcategories = get_object_or_404(
                 Sub_Category, slug=subcategory_slug)
@@ -42,25 +76,81 @@ def shop(request, category_slug=None, subcategory_slug=None):
             page = request.GET.get('page')
             paged_products = paginator.get_page(page)
             # subcategory_count= products.count()
+            if 'filtering'  not in request.POST: 
+                if request.method == 'POST':
+                    sort_id = request.POST['sorting']
+
+                    if sort_id == 'low':
+                        product = Product.objects.filter(sub_category=subcategories).order_by('price')
+                        count = product.count()
+                        paginator = Paginator(product,4)
+                        page = request.GET.get('page')
+                        paged_products = paginator.get_page(page)
+
+                    else:
+                        product = Product.objects.filter(sub_category=subcategories).order_by('-price')
+                        count = product.count()
+                        paginator = Paginator(product,4)
+                        page = request.GET.get('page')
+                        paged_products = paginator.get_page(page)
+
+            if 'filtering'  in request.POST: 
+                if request.method == 'POST':
+                    sort = request.POST['filtering']
+                    key = Filter_Price.objects.get(name=sort)
+                    a = key.pricerange_from
+                    b = key.pricerange_to
+                    product= Product.objects.filter(sub_category=subcategories,price__range=(a,b))
+                    paginator = Paginator(product, 4)
+                    page = request.GET.get('page')
+                    paged_products = paginator.get_page(page)        
+
 
     else:
         products = Product.objects.all().filter(is_available=True).order_by('-id')
-        filter_prices = Filter_Price.objects.all().order_by('id')
         paginator = Paginator(products, 9)
         page = request.GET.get('page')
         paged_products = paginator.get_page(page)
         product_count = products.count()
 
-        # if filter_prices:
-        #     products =Product.objects.filter(filter_price=filter_prices)
-        # else:
-        #     products = Product.objects.all().filter(is_available = True).order_by('id')
+        if 'filtering' in request.POST:
+            
+            if request.method == 'POST':
+                    sort = request.POST['filtering']
+                    key = Filter_Price.objects.get(name=sort)
+                    a = key.pricerange_from
+                    b=key.pricerange_to
+                    product= Product.objects.filter(sub_category=subcategories,price__range=(a,b))
+                    paginator = Paginator(product, 4)
+                    page = request.GET.get('page')
+                    paged_products = paginator.get_page(page)    
 
+
+        if 'filtering' not in request.POST:
+            if request.method == 'POST':
+                    sort_id = request.POST['sorting']
+                    
+                    if sort_id == 'low':
+                        products = Product.objects.all().filter(is_available=True).order_by('price')
+                        count = products.count()
+                        paginator = Paginator(products,6)
+                        page = request.GET.get('page')
+                        paged_products = paginator.get_page(page)
+
+                    else:
+                        products = Product.objects.all().filter(is_available=True).order_by('-price')
+                        count = products.count()
+                        paginator = Paginator(products,6)
+                        page = request.GET.get('page')
+                        paged_products = paginator.get_page(page)
+
+    filter = Filter_Price.objects.all().order_by('id')
     context = {
         'products': paged_products,
         'product_count': product_count,
         'subcategories': subcategories,
         'categories': categories,
+       'filter':filter,
 
     }
     return render(request, 'store/shop.html', context)
@@ -69,37 +159,38 @@ def shop(request, category_slug=None, subcategory_slug=None):
 def product_details(request, category_slug, subcategory_slug, product_slug):
     try:
         print("my try")
-        single_product = Product.objects.filter(
+        single_product = Product.objects.get(
             category__slug=category_slug, sub_category__slug=subcategory_slug, slug=product_slug)
         related_products = Product.objects.filter(
             sub_category__slug=subcategory_slug)[0:4]
 
     except Exception as e:
         raise e
-
+    if request.user.is_authenticated:   
+        try:
+            orderproduct = OrderProduct.objects.filter(user=request.user,product_id = single_product.id ).exists()
+        except OrderProduct.DoesNotExist:
+            orderproduct = None    
+    else:
+        orderproduct = None 
+    reviews = ReviewRating.objects.filter(product_id = single_product.id ,status = True)     
     context = {
         'single_product': single_product,
         'related_products': related_products,
+        'orderproduct':orderproduct,
+        'reviews':reviews,
+        
     }
     return render(request, 'store/shop-details.html', context)
 
 
-def filter_price(request):
-    filter_prices = Filter_Price.objects.all().order_by('id')
-
-    products = Product.objects.filter(filter_price=filter_prices)
-
-    context = {
-        'products': products,
-    }
-
-    return render(request, 'store/shop.html', context)
 
 
 def search(request):
     if 'keyword' in request.GET:
         keyword = request.GET['keyword']
         if keyword:
+            
             products = Product.objects.order_by('-id').filter(Q(description__icontains=keyword) | Q(
                 product_name__icontains=keyword) | Q(category__category_name__icontains=keyword))
             product_count = products.count()
@@ -119,7 +210,7 @@ def search(request):
 def _cart_id(request):
 
     cart = request.session.session_key
-    if not cart:
+    if not cart: # if no session create new one
         cart = request.session.create()
     return cart
 
@@ -165,8 +256,13 @@ def addcart(request, product_id):
                 index = existing_variation_list.index(product_variation)
                 item_id = id[index]
                 item = Cartitems.objects.get(product=product, id=item_id)
-                item.quantity += 1
-                item.save()
+                if (product.stock - item.quantity)>0:
+                    item.quantity += 1
+                    item.save()
+                else:
+                    messages.error(request,'No more stock available')
+                    return redirect('cart')    
+
 
             else:
                 item = Cartitems.objects.create(
@@ -237,8 +333,12 @@ def addcart(request, product_id):
                 index = existing_variation_list.index(product_variation)
                 item_id = id[index]
                 item = Cartitems.objects.get(product=product, id=item_id)
-                item.quantity += 1
-                item.save()
+                if (product.stock - item.quantity)>0:
+                    item.quantity += 1
+                    item.save()
+                else:
+                    messages.error(request,'No more stock available')
+                    return redirect('cart')    
 
             else:
                 item = Cartitems.objects.create(
@@ -306,11 +406,11 @@ def cart(request, total=0, quantity=0, cart_items=None):
         grand_total = 0
         if request.user.is_authenticated:
             cart_items = Cartitems.objects.filter(
-                user=request.user, is_active=True)
+                user=request.user, is_active=True).order_by('-id')
 
         else:
             cart = Cart.objects.get(cart_id=_cart_id(request))
-            cart_items = Cartitems.objects.filter(cart=cart, is_active=True)
+            cart_items = Cartitems.objects.filter(cart=cart, is_active=True).order_by('-id')
         for cart_item in cart_items:
             total += (cart_item.product.price * cart_item.quantity)
             print(total)
@@ -339,6 +439,10 @@ def checkout(request, total=0, quantity=0, cart_items=None):
         tax = 0
         grand_total = 0
         address = None
+        start = 0
+        discount=0
+        discount_price=0
+        data=0
       
             
         if request.method == 'POST':
@@ -367,18 +471,61 @@ def checkout(request, total=0, quantity=0, cart_items=None):
         
         cart_items = Cartitems.objects.filter(user=request.user, is_active=True)
         address = Address.objects.filter(user=request.user)
+        coppen = Discount.objects.all()
        
         for cart_item in cart_items:
             total += (cart_item.product.price * cart_item.quantity)
             print(total)
             quantity += cart_item.quantity
-           
-          
+
         
-        tax = (3 * total)/100
-        grand_total = total + tax
+        if request.method=='POST':
+            checkd = Discount_coupon.objects.filter(user=request.user).exists()
+            if checkd:
+                Discount_coupon.objects.filter(user=request.user).delete()
+            
+            try:
+                coupon = request.POST['coupon']
+                # check = Discount.objects.filter(code=coupon)
+                checked = Discount.objects.get(code=coupon)
+                if checked:
+                    start =checked.discount_from
+                    discount = checked.discount_percentage
+                else:
+                        pass   
+            except:
+                tax = (1 * total)/100
+                grand_total = total + tax
+            
+        else:
+            tax = (1 * total)/100
+            grand_total = total + tax
+
+
+        print(start)
+        print(discount)
+                  
+        tax = (1 * total)/100
+        grand_total_without = total + tax 
+        print(quantity)
+        try:
+            if start:
+                if grand_total_without >= start:
+                    discount_price = int(grand_total_without * discount / 100)
+                    grand_total =int(grand_total_without - discount_price)
+                    data = Discount_coupon()
+                    data.user = request.user
+                    data.discount_applied=discount_price
+                    data.save()
+        except:
+            grand_total = int(grand_total_without)
+     
+        
+        
     except ObjectDoesNotExist:
         pass
+
+
 
     context = {
         'total': total,
@@ -386,7 +533,72 @@ def checkout(request, total=0, quantity=0, cart_items=None):
         'cart_items': cart_items,
         'tax': tax,
         'grand_total': grand_total,
-        'address':address,
+        'discount_price':discount_price,
+        'address':address, 
+        'data':data,
+        'coppen':coppen
 
     }
     return render(request, 'store/checkout.html', context)
+
+def contact(request):
+    return render(request,'store/contact.html')
+
+def Wishlist(request):
+    wlist = wishlist.objects.filter(user=request.user)
+
+    context = {
+        'wlist':wlist
+    }
+    return render(request,'store/wishlist.html',context)
+
+
+def addwish(request,id):
+    product = Product.objects.get(id=id)
+
+    check  = wishlist.objects.filter(product=product).exists()
+
+    if not check:
+        wish = wishlist()
+        wish.user = request.user
+        wish.product = product
+        wish.save()
+    return redirect ('shop')
+
+def removewish(request,id):
+    wish = wishlist.objects.get(id=id)
+    wish.delete()
+    return redirect ('wishlist')    
+
+
+def submit_review(request,product_id):
+    print('hg')
+    url = request.META.get('HTTP_REFERER')
+    if request.method == 'POST':
+        print('hli')
+        try:
+            print('hello')
+            reviews = ReviewRating.objects.get(user__id=request.user.id,product__id=product_id)
+            forms = ReviewForm(request.POST,request.FILES,instance=reviews,)
+            forms.save()
+            messages.success(request,'Your Review has been updated')
+            return redirect(url)
+
+
+        except ReviewRating.DoesNotExist: 
+            print('haiiiiii')
+            form = ReviewForm(request.POST,request.FILES)
+            print('ghds')
+            if form.is_valid():
+                print('ghlkds')
+                data = ReviewRating() 
+                data.subjects = form.cleaned_data['subjects']
+                print(data.subjects)
+                data.rating = form.cleaned_data['rating']
+                data.review = form.cleaned_data['review']
+                data.ip = request.META.get('REMOTE_ADDR')
+                data.product_id = product_id
+                data.user_id = request.user.id 
+                data.save()
+                messages.success(request,'Thank You For Your Review')
+                return redirect(url)

@@ -1,5 +1,5 @@
 from django.db import models
-from pytz import country_names
+
 from accounts.models import Account
 from store.models import Product,Variation
 
@@ -38,13 +38,33 @@ class Address(models.Model):
         return f"{self.address_line1} {self.address_line2}"
 
     def __str__(self):
-        return self.first_name        
+        return self.first_name    
+
+class Discount(models.Model):
+    code = models.CharField(max_length=15)
+    discount_percentage = models.FloatField()
+    discount_from = models.IntegerField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.code
+
+class Discount_coupon(models.Model):
+    user = models.ForeignKey(Account,on_delete=models.CASCADE,null=True)
+    discount_applied =  models.DecimalField(max_digits=10,decimal_places=2 , null=True)
+
+    def __int__(self):
+        return self.discount_applied
+
 
 class Order(models.Model):
     STATUS = (
-        ('New','New'),
-        ('Accepted','Accepted'),
-        ('Completed','Completed'),
+        ('ordered','ordered'),
+        ('shipped','shipped'),
+        ('out_for_delivery','out_for_delivery'),
+        ('Delivered','Delivered'),
         ('Cancelled','Cancelled'),
     )
 
@@ -54,7 +74,7 @@ class Order(models.Model):
     order_number = models.CharField(max_length=30)
     order_total = models.FloatField()
     tax     = models.FloatField()
-    status = models.CharField(max_length=10,choices=STATUS,default='New')
+    status = models.CharField(max_length=50,choices=STATUS,default='New')
     ip = models.CharField(blank=True,max_length=20)
     is_ordered = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -79,4 +99,7 @@ class OrderProduct(models.Model):
 
     def __str__(self):
         return self.user.first_name
+
+
+
 

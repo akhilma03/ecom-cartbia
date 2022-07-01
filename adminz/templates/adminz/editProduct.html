@@ -1,0 +1,210 @@
+{% extends 'adminz/base1.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="row page-titles">
+            <div class="col-md-5 align-self-center">
+                <h4 class="text-themecolor">Add Product </h4>
+            </div>
+            <div class="col-md-7 align-self-center text-right">
+                <div class="d-flex justify-content-end align-items-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active">Products edit</li>
+                    </ol>
+                    <button type="button" class="btn btn-info d-none d-lg-block m-l-15"><i
+                            class="fa fa-plus-circle"></i> Create New</button>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Info box Content -->
+        <!-- ============================================================== -->
+       
+
+
+  
+    <div class="main">
+
+        <section class="signup">
+            <!-- <img src="images/signup-bg.jpg" alt=""> -->
+            
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %} 
+            <div class="container">
+               
+                
+                <div class="signup-content">
+                    <form method="" id="signup-form" class="signup-form">
+
+                        <h2 class="form-title">Add Product </h2>
+                        <div class="col form-group">
+                            <label > Product Name</label><br>
+                            {{form.product_name}}  
+                        </div>
+                        <div class="col form-group">
+                            <label > Slug</label><br>
+                            {{form.slug}}  
+                        </div>
+                        <div class="col form-group">
+                            <label > Category</label><br>
+                            {{form.category}}  
+                        </div>
+                        <div class="col form-group">
+                            <label > Sub Category</label><br>
+                            {{form.sub_category}}  
+                        </div>
+                        <div class="col form-group">
+                            <label > Description</label><br>
+                            {{form.description}}  
+                        </div>
+                        <div class="col form-group">
+                            <label > Price </label><br>
+                            {{form.price}} 
+                        </div>
+                        <div class="col form-group">
+                            <label > Image </label><br>
+                            {{form.images}}
+                        </div>
+                        <div class="col form-group">
+                            <label > Image1 </label><br>
+                            {{form.images1}}
+                        </div>
+                        <div class="col form-group">
+                            <label > Image2 </label><br>
+                            {{form.images2}}
+                        </div>
+                        <div class="col form-group">
+                            <label > Image3 </label><br>
+                            {{form.images3}}
+                        </div>
+                        <div class="col form-group">
+                            <label > Stock </label><br>
+                            {{form.stock}}
+                         
+                            <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                        </div>
+                        <div class="col form-group">
+                            <label > Is Available </label><br>
+                            {{form.is_available}}
+                        </div>
+                     
+                        <div class="col form-group">
+                           <a href=""> <input type="submit" name="submit" id="submit" class="form-submit" value="Save"/></a>
+                        </div>
+                    </form>
+                  
+
+                    
+                </div>
+            </div>
+        </form>
+        </section>
+
+    </div>
+
+
+    hell
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Right sidebar -->
+    <!-- ============================================================== -->
+    <!-- .right-sidebar -->
+    <div class="right-sidebar">
+        <div class="slimscrollright">
+            <div class="rpanel-title"> Service Panel <span><i class="ti-close right-side-toggle"></i></span> </div>
+            <div class="r-panel-body">
+                <ul id="themecolors" class="m-t-20">
+                    <li><b>With Light sidebar</b></li>
+                    <li><a href="javascript:void(0)" data-skin="skin-default" class="default-theme working">1</a></li>
+                    <li><a href="javascript:void(0)" data-skin="skin-green" class="green-theme">2</a></li>
+                    <li><a href="javascript:void(0)" data-skin="skin-red" class="red-theme">3</a></li>
+                    <li><a href="javascript:void(0)" data-skin="skin-blue" class="blue-theme">4</a></li>
+                    <li><a href="javascript:void(0)" data-skin="skin-purple" class="purple-theme">5</a></li>
+                    <li><a href="javascript:void(0)" data-skin="skin-megna" class="megna-theme">6</a></li>
+                    <li class="d-block m-t-30"><b>With Dark sidebar</b></li>
+                    <li><a href="javascript:void(0)" data-skin="skin-default-dark" class="default-dark-theme ">7</a>
+                    </li>
+                    <li><a href="javascript:void(0)" data-skin="skin-green-dark" class="green-dark-theme">8</a></li>
+                    <li><a href="javascript:void(0)" data-skin="skin-red-dark" class="red-dark-theme">9</a></li>
+                    <li><a href="javascript:void(0)" data-skin="skin-blue-dark" class="blue-dark-theme">10</a></li>
+                    <li><a href="javascript:void(0)" data-skin="skin-purple-dark" class="purple-dark-theme">11</a></li>
+                    <li><a href="javascript:void(0)" data-skin="skin-megna-dark" class="megna-dark-theme ">12</a></li>
+                </ul>
+                <ul class="m-t-20 chatonline">
+                    <li><b>Chat option</b></li>
+                    <li>
+                        <a href="javascript:void(0)"><img src="../assets/images/users/1.jpg" alt="user-img"
+                                class="img-circle"> <span>Varun Dhavan <small
+                                    class="text-success">online</small></span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><img src="../assets/images/users/2.jpg" alt="user-img"
+                                class="img-circle"> <span>Genelia Deshmukh <small
+                                    class="text-warning">Away</small></span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><img src="../assets/images/users/3.jpg" alt="user-img"
+                                class="img-circle"> <span>Ritesh Deshmukh <small
+                                    class="text-danger">Busy</small></span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><img src="../assets/images/users/4.jpg" alt="user-img"
+                                class="img-circle"> <span>Arijit Sinh <small
+                                    class="text-muted">Offline</small></span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><img src="../assets/images/users/5.jpg" alt="user-img"
+                                class="img-circle"> <span>Govinda Star <small
+                                    class="text-success">online</small></span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><img src="../assets/images/users/6.jpg" alt="user-img"
+                                class="img-circle"> <span>John Abraham<small
+                                    class="text-success">online</small></span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><img src="../assets/images/users/7.jpg" alt="user-img"
+                                class="img-circle"> <span>Hritik Roshan<small
+                                    class="text-success">online</small></span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><img src="../assets/images/users/8.jpg" alt="user-img"
+                                class="img-circle"> <span>Pwandeep rajan <small
+                                    class="text-success">online</small></span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Right sidebar -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- footer -->
+{% endblock %}

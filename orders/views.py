@@ -1,19 +1,24 @@
 import razorpay
 from django.shortcuts import redirect, render
 from store.views import Cartitems,Product
-from .forms import AddressForm
-from .models import Address, Order, OrderProduct, Payment
+from .models import Address, Order, OrderProduct, Payment,Discount_coupon
 import datetime
-from django.contrib import messages,auth
+from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+from django.conf import settings
 
 
-from http import client
 
 # Create your views here.
 def placeOrder(request,total=0, quantity=0):
+    value=0
+    grand_total = 0
+    tax = 0
+    dc_price=0
+    discount=0
+
     current_user = request.user
 
     # if the cart count is less than or equal to 0 , then redirect to shop
@@ -21,15 +26,33 @@ def placeOrder(request,total=0, quantity=0):
     cart_count = cart_items.count()
     if cart_count <= 0:
         return redirect('shop')
-
-    grand_total = 0
-    tax = 0
+    
     for cart_item in cart_items:
         total += (cart_item.product.price * cart_item.quantity)
         quantity += cart_item.quantity
 
-    tax = (3 * total)/100
-    grand_total = total + tax 
+    tax = (1 * total)/100
+    grand_total_without = total + tax 
+    print(grand_total_without)
+
+    try:
+        data1 = Discount_coupon.objects.get(user=current_user)
+        print('dsfs')
+        print(1+2)
+        print(data1)
+        discount = data1.discount_applied 
+        print(discount)
+        grand_total= int(grand_total_without - float(discount))
+        print('dsfs')
+        print(grand_total)
+     
+
+    except:
+       grand_total = grand_total_without 
+        
+
+
+
     print("hello")
     if request.method == 'POST':
         if 'address' in request.POST:
@@ -65,6 +88,8 @@ def placeOrder(request,total=0, quantity=0):
                 'cart_items':cart_items,
                 'grand_total':grand_total,
                 'address':address,
+                'dc_price': dc_price,
+                'discount': discount
             }
 
             return render (request,'orders/payment.html', context)
@@ -72,8 +97,9 @@ def placeOrder(request,total=0, quantity=0):
             messages.error(request,'Please Enter a Address to Continue')
             return redirect('checkout')   
     else: 
-        return redirect('checkout')                 
-
+        return redirect('checkout')  
+                       
+@csrf_exempt
 def payment(request):
 
     current_user = request.user
@@ -81,19 +107,36 @@ def payment(request):
     grand_total = 0
     total= 0
     tax = 0
+    discount = 0
     quantity = 0
+    paisa = 0
     for cart_item in cart_items:
         total += (cart_item.product.price * cart_item.quantity)
         quantity += cart_item.quantity
 
-    tax = (3 * total)/100
-    grand_total = (total + tax)*100 
-    paisa = grand_total/100
+    tax = (1 * total)/100
+    grand_total_without = (total + tax)
+ #
+    try:
+        data1 = Discount_coupon.objects.get(user=current_user)
+        discount = data1.discount_applied 
+        print(discount)
+        grand_total = int((grand_total_without - float(discount))*100)
+        print('dsfs')
+        data1 = Discount_coupon.objects.get(user=current_user)
+        data1.delete()
+
  
+     
+
+    except:
+       grand_total =  grand_total_without*100
+       paisa = grand_total/100
+
 
 #create razor pay client
 
-    Client =razorpay.Client(auth=('rzp_test_jiqUdEu9mZHhRH','dCivm5cm9vpJ4flAeFzB001J'))
+    Client =razorpay.Client(auth=(settings.RAZORPAY_ID,settings.RAZORPAY_KEY))
     #create order
 
     response_payment=Client.order.create(dict( amount=grand_total,currency='INR'))
@@ -115,6 +158,7 @@ def payment(request):
         'grand_total':paisa,
         'tax':tax,
         'total':total,
+        'grand_total_without':grand_total_without,
     }    
 
     return render (request,'orders/razorpayment.html',context)
@@ -145,7 +189,7 @@ def payment_status(request):
         print(order_number) 
         order=Order.objects.get(user=request.user,is_ordered=False,order_number=order_number) 
         order.payment=payment  
-        order.status='Completed' 
+        order.status='ordered' 
         order.is_ordered = True
         order.save()
 

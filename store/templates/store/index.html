@@ -2,7 +2,9 @@
 
 {% load static %}
 
-
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
+</style>
 <body>
     {% block content %}
     <!-- Header Section End -->
@@ -77,11 +79,13 @@
                     <div class="product__item">
                         <div class="product__item__pic set-bg" data-setbg="{{product.images.url}}">
                             <span class="label">New</span>
+                            {% if user.is_authenticated %}
                             <ul class="product__hover">
-                                <li><a href="#"><img src="{% static 'images/icon/heart.png' %}" alt=""></a></li>
+                                <li><a href="{% url 'addwish' product.id %}"><img src="{% static 'images/icon/heart.png' %}" alt=""></a></li>
                                 <li><a href="#"><img src="{% static 'images/icon/compare.png' %}" alt=""> <span>Compare</span></a></li>
                                 <li><a href="#"><img src="{% static 'images/icon/search.png' %}" alt=""></a></li>
                             </ul>
+                            {% endif %}
                         </div>
                         <div class="product__item__text">
                             <h6>{{product.product_name}}</h6>
@@ -224,7 +228,7 @@
                         <h2>Instagram</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                         labore et dolore magna aliqua.</p>
-                        <h3>#Male_Fashion</h3>
+                        <h3>#Cartbia</h3>
                     </div>
                 </div>
             </div>
@@ -286,7 +290,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__logo">
-                            <a href="#"><img src="{% static 'images/footer-logo.png' %}" alt=""></a>
+                            <a href="#"><img src="{% static 'images/cartbia2.png' %}" style="height:8rem ;" alt=""></a>
                         </div>
                         <p>The customer is at the heart of our unique business model, which includes design.</p>
                         <a href="#"><img src="{% static 'images/payment.png' %}" alt=""></a>
@@ -297,8 +301,8 @@
                         <h6>Shopping</h6>
                         <ul>
                             <li><a href="#">Clothing Store</a></li>
-                            <li><a href="#">Trending Shoes</a></li>
-                            <li><a href="#">Accessories</a></li>
+                            <li><a href="#">Branded Cloth</a></li>
+                            <li><a href="#">Royal</a></li>
                             <li><a href="#">Sale</a></li>
                         </ul>
                     </div>
@@ -334,9 +338,9 @@
                         <p>Copyright ©
                             <script>
                                 document.write(new Date().getFullYear());
-                            </script>2020
-                            All rights reserved | This template is made with <i class="fa fa-heart-o"
-                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            </script>
+                            Love Fashion Love Cartbia <i class="fa fa-heart-o"
+                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Cartbia</a>
                         </p>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </div>

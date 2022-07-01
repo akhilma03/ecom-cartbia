@@ -1,0 +1,151 @@
+
+      
+
+      {% extends 'adminz/base1.html' %}
+
+      {% load static %}
+      
+      {% block content %}
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Page wrapper  -->
+      <!-- ============================================================== -->
+      <div class="page-wrapper">
+      <!-- ============================================================== -->
+      <!-- Container fluid  -->
+      <!-- ============================================================== -->
+      <div class="container-fluid">
+      <!-- ============================================================== -->
+      <!-- Bread crumb and right sidebar toggle -->
+      <!-- ============================================================== -->
+      <div class="row page-titles">
+      <div class="col-md-5 align-self-center">
+      <h4 class="text-themecolor">Product Details</h4>
+      </div>
+      <div class="col-md-7 align-self-center text-right">
+      <div class="d-flex justify-content-end align-items-center">
+          <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+              <li class="breadcrumb-item active">Footable</li>
+          </ol>
+
+      </div>
+      </div>
+      </div>
+      <!-- ============================================================== -->
+      <!-- End Bread crumb and right sidebar toggle -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Start Page Content -->
+      <!-- ============================================================== -->
+      <div class="row">
+      <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+              <h4 class="card-title">Banners</h4>
+              <h6 class="card-subtitle"></h6>
+             <a href="{% url 'addsubcategory' %}"> <button type="button" class="btn btn-info btn-rounded m-t-10 float-right" data-toggle="modal" data-target="#add-contact">Edit Banner</button></a>
+         
+                                              </div>
+                                              <!-- /.modal-dialog -->
+                                          </div>
+                                          <div class="table-responsive">
+                                              <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list" data-paging="true" data-paging-size="7">
+                                                  <thead>
+                                                      <tr>
+                                                          <!-- <th>No</th> -->
+                                                          <th>Carosel Heading 1</th>
+                                                          <th>Carosel Heading 2</th>
+                                                          <th>Carosel Description</th>
+                                                          <th>Carosel Image1</th>
+                                                          <th>Carosel Image2</th>
+                                                          <th>Banner Name1</th>
+                                                          <th>Banner Name2</th>
+                                                          <th>Banner Name3</th>
+                                                          <th>Banner Image1</th>
+                                                          <th>Banner Image2</th>
+                                                          <th>Banner Image3</th>
+                                                          <th>Fashion Trend1</th>
+                                                          <th>Fashion Trend2</th>
+                                                          <th>Fashion Trend3</th>
+                                                          <th>Fashion Trend Image1</th>
+                                                          <th>Fashion Trend Image2</th>
+                                                          <th>Fashion Trend Image3</th>
+                                                         
+                                                          <th>Edit</th>
+                                                          <th>Delete</th>
+                                                      </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                      {% for banner in banners %}
+                                                      <tr>
+                                                          <!-- <td>{{product.id}}</td> -->
+                                                        
+                                                          <td>{{banner.carosel_hd1}}</td>
+                                                          <td>{{banner.carosel_hd2}}</td>
+                                                          <td>{{banner.carosel_hd3}}</td>
+                                                          <td>{{banner.ca_image1}}</td>
+                                                          <td>{{banner.ca_image2}}</td>
+                                                          <td>{{banner.banner_name1}}</td>
+                                                          <td>{{banner.banner_name2}}</td>
+                                                          <td>{{banner.banner_name3}}</td>
+                                                          <td>{{banner.bannerimg1}}</td>
+                                                          <td>{{banner.bannerimg2}}</td>
+                                                          <td>{{banner.bannerimg3}}</td>
+                                                          <td>{{banner.fashiontrend_name1}}</td>
+                                                          <td>{{banner.fashiontrend_name2}}</td>
+                                                          <td>{{banner.fashiontrend_name3}}</td>
+                                                          <td>{{banner.insta_image1}}</td>
+                                                          <td>{{banner.insta_image2}}</td>
+                                                          <td>{{banner.insta_image3}}</td>
+                                                         
+                                                          <td>
+                                                              <div class="pro-img-overlay"><a href="{% url 'Editbanners' banner.id  %}" ><i class="ti-marker-alt" style="font-size:20px"></i></a> </div>
+                                                          </td>
+                                                          <td>
+                                                              <div class="pro-img-overlay"> <a href="" ><i class="ti-trash" style="font-size:20px"></i></a></div>
+                                                          </td>
+                                                      </tr>
+                                                      
+                                                      
+                                                      
+                                                     
+                                                      
+                                                      
+                                                      
+                                                      
+                      
+                                                      
+                                                      
+                                                     {% endfor %}
+                                                  </tbody>
+                                              </table>
+                                          </div>
+                                      </div>
+                                  </div>
+                             <!-- Column -->
+                                  
+                               
+                          </div>
+                      </div>
+                      <!-- ============================================================== -->
+                      <!-- End PAge Content -->
+                      <!-- ============================================================== -->
+                      <!-- ============================================================== -->
+                      <!-- Right sidebar -->
+                      <!-- ============================================================== -->
+                      <!-- .right-sidebar -->
+                     ========================================================== -->
+                      <!-- End Right sidebar -->
+                      <!-- ============================================================== -->
+                  </div>
+                  <!-- ============================================================== -->
+                  <!-- End Container fluid  -->
+                  <!-- ============================================================== -->
+              </div>
+              <!-- ============================================================== -->
+              <!-- End Page wrapper  -->
+              <!-- ============================================================== -->
+              <!-- ============================================================== -->
+            
+              {% endblock %}

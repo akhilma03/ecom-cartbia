@@ -1,0 +1,31 @@
+<div>
+    {% for item in  orders %}
+<div class="my-3 py-5 d-flex bg-light">
+    <div
+        class="order-tracking {% if item.status == 'ordered' or item.status == 'shipped' or item.status == 'out_for_delivery' or item.status == 'delivered' %} completed {% endif %}"
+    >
+        <span class="is-complete"></span>
+        <p>Ordered</p>
+    </div>
+    <div
+        class="order-tracking {% if item.status == 'shipped' or item.status == 'out_for_delivery' or item.status == 'delivered' %} completed {% endif %}"
+    >
+        <span class="is-complete"></span>
+        <p>Shipped</p>
+    </div>
+    <div
+        class="order-tracking {% if item.status == 'delivered' or item.status == 'out_for_delivery' %} completed {% endif %}"
+    >
+        <span class="is-complete"></span>
+        <p>Out For Delivery</p>
+    </div>
+    <div
+        class="order-tracking {% if item.status == 'delivered' %} completed {% endif %}"
+    >
+        <span class="is-complete"></span>
+        <p>Delivered</p>
+    </div>
+</div>
+{% endfor %}
+
+</div>

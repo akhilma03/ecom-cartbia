@@ -1,0 +1,139 @@
+{% extends 'adminz/base1.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="row page-titles">
+            <div class="col-md-5 align-self-center">
+                <h4 class="text-themecolor">Add Product </h4>
+            </div>
+            <div class="col-md-7 align-self-center text-right">
+                <div class="d-flex justify-content-end align-items-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active">Products edit</li>
+                    </ol>
+                    <button type="button" class="btn btn-info d-none d-lg-block m-l-15"><i
+                            class="fa fa-plus-circle"></i> Create New</button>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Info box Content -->
+        <!-- ============================================================== -->
+       
+
+
+
+    <div class="main">
+
+        <section class="signup">
+            <!-- <img src="images/signup-bg.jpg" alt=""> -->
+            
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %} 
+            <div class="container">
+               
+                
+                <div class="signup-content">
+                    <form method="" id="signup-form" class="signup-form">
+
+                        <h2 class="form-title">Add Variations </h2>
+                        <div class="col form-group">
+                            <label > Product </label><br>
+                            {{form.name}}  
+                        </div>
+                       
+                        <div class="col form-group">
+                            <label > Variation_Category</label><br>
+                            {{form.pricerange_from}}  
+                        </div>
+                        <div class="col form-group">
+                            <label > Variation_Value</label><br>
+                            {{form.pricerange_to}}  
+                        </div>
+                        
+                       
+                       
+                        
+                     
+                        <div class="col form-group">
+                           <a href=""> <input type="submit" name="submit" id="submit" class="form-submit" value="Save"/></a>
+                        </div>
+                    </form>
+                    <div class="text-white bg-danger">
+                        {% if messages %}
+                        {% for message in messages %}
+                        {{message}}
+    
+                        {% endfor %}
+                    {% endif %}  
+                </div>
+
+                    
+                </div>
+            </div>
+        </form>
+        </section>
+
+    </div>
+
+
+
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Right sidebar -->
+    <!-- ============================================================== -->
+    <!-- .right-sidebar -->
+    <div class="right-sidebar">
+        <div class="slimscrollright">
+            <div class="rpanel-title"> Service Panel <span><i class="ti-close right-side-toggle"></i></span> </div>
+            <div class="r-panel-body">
+                <ul id="themecolors" class="m-t-20">
+                    <li><b>With Light sidebar</b></li>
+                    <li><a href="javascript:void(0)" data-skin="skin-default" class="default-theme working">1</a></li>
+                    <li><a href="javascript:void(0)" data-skin="skin-green" class="green-theme">2</a></li>
+                    <li><a href="javascript:void(0)" data-skin="skin-red" class="red-theme">3</a></li>
+                    <li><a href="javascript:void(0)" data-skin="skin-blue" class="blue-theme">4</a></li>
+                    <li><a href="javascript:void(0)" data-skin="skin-purple" class="purple-theme">5</a></li>
+                    <li><a href="javascript:void(0)" data-skin="skin-megna" class="megna-theme">6</a></li>
+                    <li class="d-block m-t-30"><b>With Dark sidebar</b></li>
+                    <li><a href="javascript:void(0)" data-skin="skin-default-dark" class="default-dark-theme ">7</a>
+                    </li>
+                    <li><a href="javascript:void(0)" data-skin="skin-green-dark" class="green-dark-theme">8</a></li>
+                    <li><a href="javascript:void(0)" data-skin="skin-red-dark" class="red-dark-theme">9</a></li>
+                    <li><a href="javascript:void(0)" data-skin="skin-blue-dark" class="blue-dark-theme">10</a></li>
+                    <li><a href="javascript:void(0)" data-skin="skin-purple-dark" class="purple-dark-theme">11</a></li>
+                    <li><a href="javascript:void(0)" data-skin="skin-megna-dark" class="megna-dark-theme ">12</a></li>
+                </ul>
+              >
+    <!-- ============================================================== -->
+    <!-- End Right sidebar -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- footer -->
+{% endblock %}

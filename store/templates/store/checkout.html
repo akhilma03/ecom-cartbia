@@ -33,8 +33,8 @@
                
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
-                            <h6 class="coupon__code"><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click
-                                    here</a> to enter your code</h6>
+                          
+                                    
                             <h6 class="checkout__title">Billing Details</h6>
                             <div class="row">
                                 <div class="col-lg-6">
@@ -104,6 +104,24 @@
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="checkout__order">
+                                                <!-- adeeddddddd --> 
+                                                <div class="cupon_area"> 
+                                                    <div class="check_title w-100"> 
+                                                   <span class="icon_tag_alt"> <h5>Available Coupon  </span> </span>
+                                                    </div> 
+                                                    <form method="POST" action=""> 
+                                                        {% csrf_token %} 
+                                                        {% for ds in coppen %}
+                                                        {% if grand_total >= ds.discount_from %}
+                                                        <h6 style="color:Green;"> {{ds.code}}, <span>Upto  {{ds.discount_percentage}}%</span> off </h6>
+                                                    {% endif %}
+                                                        {% endfor %}
+                                                    <input type="text" class="form-control" id="" name="coupon">
+                                                    <button class="btn-dark" type="submit">submit</button> 
+                                                    </form>                            
+                                                </div> 
+                                                <br>
+                                                <!-- endhere -->
                 <form action="{% url 'place_order' %}" method="POST">
                     {% csrf_token %}
                     <h4 class="order__title">Select Your Address</h4>
@@ -116,8 +134,48 @@
                         </p>
                         {% endfor %}
 
+                        
+
+                     
+                        <h4 class="order__title">Your order</h4>
+                        <div class="table-responsive">
+                            <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list" data-paging="true" data-paging-size="7">
+                                <thead>
+                                    <tr>
+                                        <!-- <th>No</th> -->
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th>Amount </th>
+                                   
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for cart_item in cart_items %}
+                                    <tr>
+                                        <!-- <td>{{product.id}}</td> -->
+                                      
+                                        <td>{{cart_item.product.product_name}}</td>
+                                        <td> {{cart_item.quantity}}</td>
+
+                                        <td>₹ {{ cart_item.sub_total }}</td>
+                                        
+                                        
+                                       
+                        
+                                    </tr>
+                                                          
+                                   {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                      
+
+
+
+
+
                     </div>
-                    <hr>
+                    <!-- <hr>
                     <h4 class="order__title">Your order</h4>
                     <div class="checkout__order__products"> &nbsp;&nbsp; &nbsp;&nbsp;Product <span>Total
                         </span> <span>
@@ -133,9 +191,10 @@
                         </li>
 
                         {% endfor %}
-                    </ul>
+                    </ul> -->
                     <ul class="checkout__total__all">
                         <li>Tax <span>₹ {{tax}}</span></li>
+                        <li  >Discount <span class="text-success" >₹ {{discount_price}}</span></li>
                         <li>Grand Total <span>₹ {{grand_total}}</span></li>
                     </ul>
 
@@ -174,7 +233,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__logo">
-                            <a href="#"><img src="{% static 'images/footer-logo.png' %}" alt=""></a>
+                            <a href="#"><img src="{% static 'images/cartbia2.png' %}" style="height:8rem ;" alt=""></a>
                         </div>
                         <p>The customer is at the heart of our unique business model, which includes design.</p>
                         <a href="#"><img src="{% static 'images/payment.png' %}" alt=""></a>
@@ -185,8 +244,8 @@
                         <h6>Shopping</h6>
                         <ul>
                             <li><a href="#">Clothing Store</a></li>
-                            <li><a href="#">Trending Shoes</a></li>
-                            <li><a href="#">Accessories</a></li>
+                            <li><a href="#">Branded Cloth</a></li>
+                            <li><a href="#">Royal</a></li>
                             <li><a href="#">Sale</a></li>
                         </ul>
                     </div>
@@ -222,9 +281,9 @@
                         <p>Copyright ©
                             <script>
                                 document.write(new Date().getFullYear());
-                            </script>2020
-                            All rights reserved | This template is made with <i class="fa fa-heart-o"
-                                aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            </script>
+                            Love Fashion Love Cartbia <i class="fa fa-heart-o"
+                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Cartbia</a>
                         </p>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </div>

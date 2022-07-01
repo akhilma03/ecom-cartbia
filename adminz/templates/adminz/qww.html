@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/favicon.png' %}">
+    <title>Elite Admin Template - The Ultimate Multipurpose admin template</title>
+    <!-- chartist CSS -->
+    <link href="{% static 'css/pages/ecommerce.css' %} " rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
+
+</head>
+
+<body class="skin-default fixed-layout">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader__figure"></div>
+            <p class="loader__label">Elite admin</p>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+         <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <!-- ============================================================== -->
+                <!-- Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html">
+                        <!-- Logo icon --><b>
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <img class=" mx-5"  src ="{% static 'images/loho.jpg' %}" style="height:5rem ;" alt="homepage" class="dark-logo" />
+                            <!-- Light Logo icon -->
+                            <!-- <img src="{% static 'images/loho.jpg' %}" style="height:5rem ;"alt="homepage" class="light-logo" /> -->
+                        </b>
+                        
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav mr-auto">
+                        <!-- This is  -->
+                        <li class="nav-item"> <a class="nav-link nav-toggler d-block d-md-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                        <li class="nav-item"> <a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a> </li>
+                        <!-- ============================================================== -->
+                        <!-- Search -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item">
+                            <form method="GET" class="app-search d-none d-md-block d-lg-block">
+                                <input type="text" class="form-control" placeholder="Search & enter"  name ="keyword">
+                          
+                            </form type ='submit'>
+                        </li>
+                    </ul>
+                    <!-- ============================================================== -->
+                    <!-- User profile and search -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav my-lg-0">
+                        <!-- ============================================================== -->
+                        <!-- Comment -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="ti-email"></i>
+                                <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown">
+                                <ul>
+                                    <li>
+                                        <div class="drop-title">Notifications</div>
+                                    </li>
+                                    <li>
+                                       
+                                    </li>
+                                    <li>
+                                        <a class="nav-link text-center link" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- End Comment -->
+                        <!-- ============================================================== -->
+                        <!-- ============================================================== -->
+                        <!-- Messages -->
+                        <!-- ============================================================== -->
+                       
+                        <!-- ============================================================== -->
+                        <!-- End Messages -->
+                        <!-- ============================================================== -->
+                        <!-- ============================================================== -->
+                        <!-- mega menu -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown mega-dropdown"> <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti-layout-width-default"></i></a>
+                           
+                             
+                                    
+                                   
+                                    
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- End mega menu -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item right-side-toggle"> <a class="nav-link  waves-effect waves-light" href="javascript:void(0)"><i class="ti-settings"></i></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- User Profile-->
+                <div class="user-profile">
+                    <div class="user-pro-body">
+                        <div><img src="{% static 'assets/images/users/2.jpg' %}" alt="user-img" class="img-circle"></div>
+                        <div class="dropdown">
+                            <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Steave Gection <span class="caret"></span></a>
+                            <div class="dropdown-menu animated flipInY">
+                                <!-- text-->
+                                <a href="javascript:void(0)" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
+                                <!-- text-->
+                                <a href="javascript:void(0)" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>
+                                <!-- text-->
+                                <a href="javascript:void(0)" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
+                                <!-- text-->
+                                <div class="dropdown-divider"></div>
+                                <!-- text-->
+                                <a href="javascript:void(0)" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
+                                <!-- text-->
+                                <div class="dropdown-divider"></div>
+                                <!-- text-->
+                                <a href="login.html" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
+                                <!-- text-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li>
+                         
+                        </li>
+                        < <li class="nav-small-cap">--- PERSONAL</li>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Ecommerce <span class="badge badge-pill badge-cyan ml-auto">4</span></span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{% url 'dashboard' %}">Dashboard </a></li>
+                                <li><a href="{% url 'User' %}">User Details</a></li>
+                                <li><a href="{% url 'product' %}">Products</a></li>
+                        
+                                <li><a href="{% url 'productdetails' %}">Products Details</a></li>
+                                <li><a href="{% url 'category' %}">Category</a></li>
+                                <li><a href="{% url 'subcategory' %}">Sub Category</a></li>
+                                <li><a href="{% url 'variationz' %}">Variations</a></li>
+                                <li><a href="{% url 'orders' %}">Order</a></li>
+                                <li><a href="{% url 'orderproducts' %}">Ordered Products</a></li>
+                                <li><a href="eco-products-checkout.html">Products Cehckout</a></li>
+                            </ul>
+                        </li>
+                       
+                       
+                        
+                        </li>
+                       
+                          
+                        </li>
+                     
+                        
+                       
+                      
+                       
+                      
+                        <li class="nav-small-cap">--- SUPPORT</li>
+                        <li> <a class="waves-effect waves-dark" href="../documentation/documentation.html" aria-expanded="false"><i class="far fa-circle text-danger"></i><span class="hide-menu">Documentation</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="pages-login.html" aria-expanded="false"><i class="far fa-circle text-success"></i><span class="hide-menu">Log Out</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="pages-faq.html" aria-expanded="false"><i class="far fa-circle text-info"></i><span class="hide-menu">FAQs</span></a></li>
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Bread crumb and right sidebar toggle -->
+                <!-- ============================================================== -->
+                <div class="row page-titles">
+                    <div class="col-md-5 align-self-center">
+                        <h4 class="text-themecolor">Dashboard</h4>
+                    </div>
+                    <div class="col-md-7 align-self-center text-right">
+                        <div class="d-flex justify-content-end align-items-center">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                                <li class="breadcrumb-item active">Dashboard</li>
+                            </ol>
+                            <button type="button" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Create New</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Bread crumb and right sidebar toggle -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Info box Content -->
+                <!-- ============================================================== -->
+            
+
+                    <!-- Column -->
+                    <div class="row">
+                        <!-- Column -->
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body" style="height:10rem">
+                                    <h4 class="card-title">Total Users</h4>
+                                    <h2 class="card-title">{{ucount}}</h2>
+                                  
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <!-- Column -->
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body" style="height:10rem">
+                                    <h4 class="card-title">Total Products</h4>
+                                    <h2 class="card-title">{{total_products}}</h2>
+                                  
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <!-- Column -->
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body" style="height:10rem">
+                                    <h4 class="card-title">Total Orders</h4>
+                                    <h2 class="card-title">{{total_orders}}</h2>
+                                  
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <!-- Column -->
+                        <div class="col-lg-3 col-md-6">
+                            
+                                <div class="card">
+                                    <div class="card-body" style="height:10rem">
+                                        <h4 class="card-title">Total Category</h4>
+                                        <h2 class="card-title">{{total_cat}}</h2>
+                                      
+                                       
+                                    </div>
+                                </div>
+                            
+                        </div>
+                        <!-- Column -->
+                    </div>
+                    <!-- Column -->
+                    <!-- Column -->
+                    
+                    <!-- Column -->
+                    <!-- Column -->
+                  
+                    <!-- Column -->
+                    <!-- Column -->
+                  
+                    <!-- Column -->
+                </div>
+                <!-- ============================================================== -->
+                <!-- charts -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-lg-8 col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex m-b-40 align-items-center no-block">
+                                    <h5 class="card-title ">PRODUCT SALES</h5>
+                                    
+                                    <div>
+                                        <canvas id="myChart"></canvas>
+                                    </div>
+
+
+
+
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-lg-4 col-md-12">
+                        <div class="row">
+                            <!-- Column -->
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">ORDER STATS</h5>
+                                        <div id="myChart" class="ecomm-donute"></div>
+{% comment %}  {% endcomment %}
+
+
+<div>
+    <canvas id="Charts"></canvas>
+</div>
+
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Column -->
+                            <!-- Column -->
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- charts -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Product Overview</h5>
+                                <div class="table-responsive m-t-30">
+                                    <table class="table product-overview">
+                                        <thead>
+                                            <tr>
+                                                <th>Customer</th>
+                                                <th>Order ID</th>
+                                                <th>Photo</th>
+                                                <th>Product</th>
+                                                <th>Quantity</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{total_products}}</td>
+                                                <td>#85457898</td>
+                                                <td>
+                                                    <img src="{% static 'assets/images/gallery/chair.jpg' %}" alt="iMac" width="80">
+                                                </td>
+                                                <td>Rounded Chair</td>
+                                                <td>20</td>
+                                                <td>10-7-2017</td>
+                                                <td>
+                                                    <span class="label label-success">Paid</span>
+                                                </td>
+                                                <td><a href="javascript:void(0)" class="text-inverse p-r-10" data-toggle="tooltip" title="" data-original-title="Edit"><i class="ti-marker-alt"></i></a> <a href="javascript:void(0)" class="text-inverse" title="" data-toggle="tooltip" data-original-title="Delete"><i class="ti-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Varun Dhavan</td>
+                                                <td>#95457898</td>
+                                                <td>
+                                                    <img src="{% static 'assets/images/gallery/chair2.jpg' %}" alt="iPhone" width="80">
+                                                </td>
+                                                <td>Wooden Chair</td>
+                                                <td>25</td>
+                                                <td>09-7-2017</td>
+                                                <td>
+                                                    <span class="label label-warning">Pending</span>
+                                                </td>
+                                                <td><a href="javascript:void(0)" class="text-inverse p-r-10" data-toggle="tooltip" title="" data-original-title="Edit"><i class="ti-marker-alt"></i></a> <a href="javascript:void(0)" class="text-inverse" title="" data-toggle="tooltip" data-original-title="Delete"><i class="ti-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ritesh Desh</td>
+                                                <td>#68457898</td>
+                                                <td>
+                                                    <img src="{% static 'assets/images/gallery/chair3.jpg' %}" alt="apple_watch" width="80">
+                                                </td>
+                                                <td>Gray Chair</td>
+                                                <td>12</td>
+                                                <td>08-7-2017</td>
+                                                <td>
+                                                    <span class="label label-success">Paid</span>
+                                                </td>
+                                                <td><a href="javascript:void(0)" class="text-inverse p-r-10" data-toggle="tooltip" title="" data-original-title="Edit"><i class="ti-marker-alt"></i></a> <a href="javascript:void(0)" class="text-inverse" title="" data-toggle="tooltip" data-original-title="Delete"><i class="ti-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Hrithik</td>
+                                                <td>#45457898</td>
+                                                <td>
+                                                    <img src="{% static 'assets/images/gallery/chair4.jpg' %}" alt="mac_mouse" width="80">
+                                                </td>
+                                                <td>Pure Wooden chair</td>
+                                                <td>18</td>
+                                                <td>02-7-2017</td>
+                                                <td>
+                                                    <span class="label label-danger">Failed</span>
+                                                </td>
+                                                <td><a href="javascript:void(0)" class="text-inverse p-r-10" data-toggle="tooltip" title="" data-original-title="Edit"><i class="ti-marker-alt"></i></a> <a href="javascript:void(0)" class="text-inverse" title="" data-toggle="tooltip" data-original-title="Delete"><i class="ti-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+             
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      
+                <script type="text/javascript">
+
+                    const labels = {{monthNumber|safe}} ;
+                    const data = {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Orders by Month',
+                            backgroundColor: 'rgb(255, 99, 132)',
+                            borderColor: 'rgb(255, 99, 132)',
+                            data: {{totalOrders|safe}},
+                        }]
+                    };
+                    const config = {
+                        type: 'bar',
+                        data: data,
+                        options: {}
+                    };
+                    const myChart = new Chart(
+                        document.getElementById('myChart'),
+                        config
+                    );
+                </script>
+
+                <script type="text/javascript">
+
+                    const labels = {{Number|safe}} ;
+                    const data = {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Orders by Month',
+                            backgroundColor: 'rgb(255, 99, 132)',
+                            borderColor: 'rgb(255, 99, 132)',
+                            data: {{Orders|safe}},
+                        }]
+                    };
+                    const config = {
+                        type: 'bar',
+                        data: data,
+                        options: {}
+                    };
+                    const myChart = new Chart(
+                        document.getElementById('Chart'),
+                        config
+                    );
+                </script>
+
+
+               
+
+
+
+       
+        <footer class="footer">
+            © 2019 Eliteadmin by themedesigner.in
+        </footer>
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="{% static 'assets/node_modules/jquery/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="{% static 'assets/node_modules/popper/popper.min.js' %}"></script>
+    <script src="{% static 'assets/node_modules/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="{% static 'js/perfect-scrollbar.jquery.min.js' %}"></script>
+    <!--Wave Effects -->
+    <script src="{% static 'js/waves.js' %}"></script>
+    <!--Menu sidebar -->
+    <script src="{% static 'js/sidebarmenu.js' %}"></script>
+    <!--stickey kit -->
+    <script src="{% static 'assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js' %}"></script>
+    <script src="{% static 'assets/node_modules/sparkline/jquery.sparkline.min.js' %}"></script>
+    <!--Custom JavaScript -->
+    <script src="{% static 'js/custom.min.js' %}"></script>
+    <script src="{% static 'assets/node_modules/jquery-sparkline/jquery.sparkline.min.js' %}"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugins -->
+    <!-- ============================================================== -->
+    <!--morris JavaScript -->
+    <script src="{% static 'assets/node_modules/raphael/raphael-min.js' %}"></script>
+    <script src="{% static 'assets/node_modules/morrisjs/morris.min.js' %}"></script>
+    <!--Custom JavaScript -->
+    <script src="{% static 'js/ecom-dashboard.js' %}"></script>
+</body>
+
+</html>

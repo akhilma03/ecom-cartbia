@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Category
-from . models import Product,Sub_Category,Variation,Cart,Cartitems,Filter_Price
+from . models import Product,Sub_Category,Variation,Cart,Cartitems,wishlist,ReviewRating,Filter_Price
 
 # Register your models here.
 class CategoryAdmin(admin.ModelAdmin):
@@ -43,6 +43,8 @@ admin.site.register(Variation,VariationAdmin)
 admin.site.register(Cart,CartAdmin)   
 admin.site.register(Cartitems,CartitemsAdmin)   
 admin.site.register(Filter_Price)   
+admin.site.register(wishlist)   
+admin.site.register(ReviewRating)   
 
 
 

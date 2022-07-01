@@ -1,0 +1,120 @@
+{% extends 'store/base.html' %}
+
+{% load static %}
+
+
+
+    {% block content %}
+
+
+<link href="{% static 'userp/images/favicon.ico' %}" rel="shortcut icon" type="image/x-icon">
+
+<!-- jQuery -->
+<script src="{% static 'userp/js/jquery-2.0.0.min.js' %}" type="text/javascript"></script>
+
+<!-- Bootstrap4 files-->
+<script src="{% static 'userp/js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
+<link href="{% static 'userp/css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
+
+<!-- Font awesome 5 -->
+<link href="{% static 'userp/fonts/fontawesome/css/all.min.css' %}" type="text/css" rel="stylesheet">
+
+<!-- custom style -->
+<link href="{% static 'userp/css/ui.css' %}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'userp/css/responsive.css' %}" rel="stylesheet" media="only screen and (max-width: 1200px)" />
+
+<!-- custom javascript -->
+<script src="{% static 'userp/js/script.js' %}" type="text/javascript"></script>
+
+<script type="{% static 'userp/text/javascript' %}">
+/// some script
+
+// jquery ready start
+$(document).ready(function() {
+	// jQuery code
+
+}); 
+// jquery end
+</script>
+
+</head>
+<body>
+
+
+ <!-- section-header.// -->
+
+
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y bg">
+
+<div class="container">
+	<div class="row">
+	<aside class="col-md-3">
+		<!--   SIDEBAR   -->
+		<ul class="list-group">
+			<a class="list-group-item " href="{% url 'userprofile' %}"> Dash Board </a>
+			<a class="list-group-item" href="{% url 'myorders' %}"> My Order </a>
+			<a class="list-group-item" href="{% url 'edit_profile' %}"> Edit Profile </a>
+			<a class="list-group-item" href="{% url 'changepassword' %}">Change Password </a>
+		
+		</ul>
+		<br>
+		<a class="btn btn-light btn-block" href="{% url 'userlogout' %}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span> </a> 
+		<!--   SIDEBAR .//END   -->
+	</aside>
+	<main class="col-md-9">
+		<article class="card">
+		<header class="card-header">
+			<strong class="d-inline-block mr-3">Logged in as :</strong>
+			<span>{{user.first_name}}</span>
+		</header>
+		<div class="card-body">
+			<div class="row"> 
+			<div class="col-md-6">
+				<div class="card" style="text-align: center;">
+					<div class="card-body">
+						<h5 class="card-title">Total Orders</h5>
+						<h4>{{orders_count}}</h4>
+						<a href="{% url 'myorders' %}">View Orders</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="card" style="text-align: center;">
+					<div class="card-body">
+					<img src="https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v937-aew-111_3.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=8ce2cd03f94f2baddcb332cfb50f78b9" width="50" height="50" style="border: radius 50%;"  alt="" >
+					<p class="mb-0">{{user.email}}</p>
+					<p>{{user.first_name}}  {{user.last_name}}</p>
+				
+				</div>
+				</div>
+			</div>
+			</div> <!-- row.// -->
+		</div> <!-- card-body .// -->
+
+		
+		 <!-- table-responsive .end// -->
+		</article> <!-- order-group.// --> 
+	</main>
+</div> <!-- row.// -->
+</div>
+
+
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+
+<!-- ========================= FOOTER ========================= -->
+<footer class="section-footer border-top padding-y">
+
+</footer>
+<!-- ========================= FOOTER END // ========================= -->
+
+
+
+</body>
+{% endblock %}
+
+</html>

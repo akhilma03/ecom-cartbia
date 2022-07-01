@@ -1,0 +1,126 @@
+
+
+      {% extends 'adminz/base1.html' %}
+
+      {% load static %}
+      
+      {% block content %}
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Page wrapper  -->
+      <!-- ============================================================== -->
+      <div class="page-wrapper">
+      <!-- ============================================================== -->
+      <!-- Container fluid  -->
+      <!-- ============================================================== -->
+      <div class="container-fluid">
+      <!-- ============================================================== -->
+      <!-- Bread crumb and right sidebar toggle -->
+      <!-- ============================================================== -->
+      <div class="row page-titles">
+      <div class="col-md-5 align-self-center">
+      <h4 class="text-themecolor">Product Details</h4>
+      </div>
+      <div class="col-md-7 align-self-center text-right">
+      <div class="d-flex justify-content-end align-items-center">
+          <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+              <li class="breadcrumb-item active">Footable</li>
+          </ol>
+          <button type="button" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Create New</button>
+      </div>
+      </div>
+      </div>
+      <!-- ============================================================== -->
+      <!-- End Bread crumb and right sidebar toggle -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Start Page Content -->
+      <!-- ============================================================== -->
+      <div class="row">
+      <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+              <h4 class="card-title">Discount Coupon </h4>
+              <h6 class="card-subtitle"></h6>
+             <a href="{% url 'addcoupon' %}"> <button type="button" class="btn btn-info btn-rounded m-t-10 float-right" data-toggle="modal" data-target="#add-contact">Add Discount</button></a>
+         
+                                              </div>
+                                              <!-- /.modal-dialog -->
+                                          </div>
+                                          <div class="table-responsive">
+                                              <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list" data-paging="true" data-paging-size="7">
+                                                  <thead>
+                                                      <tr>
+                                                          <!-- <th>No</th> -->
+                                                          <th>Code</th>
+                                                          <th>Discount_Percentage</th>
+                                                          <th>Discount From</th>
+                                                          <th>Created At</th>
+                                                          <th>Updated At</th>
+                                                          <th>is_active</th>
+                                                      </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                      {% for coupon in couponz %}
+                                                      <tr>
+                                                          <!-- <td>{{product.id}}</td> -->
+                                                        
+                                                          <td>{{coupon.code}}</td>
+                                                          <td>{{coupon.discount_percentage}}</td>
+                                                          <td>{{coupon.discount_from}}</td>
+                                                          <td>{{coupon.created_at}}</td>
+                                                          <td>{{coupon.updated_at}}</td>
+                                                          <td>{{coupon.is_active}}</td>
+                                                         
+                                                          <td>
+                                                              <div class="pro-img-overlay"><a href="{% url 'EditCoupon' coupon.id   %}" ><i class="ti-marker-alt" style="font-size:20px "></i></a> </div>
+                                                          </td>
+                                                          
+                                                          <td>
+                                                              <div class="pro-img-overlay"> <a href="{% url 'deletecoupon' coupon.id  %}" ><i class="ti-trash" style="font-size:20px "></i></a></div>
+                                                          </td>
+                                                      </tr>
+                                                      
+                                                      
+                                                      
+                                                     
+                                                      
+                                                      
+                                                      
+                                                      
+                      
+                                                      
+                                                      
+                                                     {% endfor %}
+                                                  </tbody>
+                                              </table>
+                                          </div>
+                                      </div>
+                                  </div>
+                             <!-- Column -->
+                                  
+                               
+                          </div>
+                      </div>
+                      <!-- ============================================================== -->
+                      <!-- End PAge Content -->
+                      <!-- ============================================================== -->
+                      <!-- ============================================================== -->
+                      <!-- Right sidebar -->
+                      <!-- ============================================================== -->
+                      <!-- .right-sidebar -->
+                     ========================================================== -->
+                      <!-- End Right sidebar -->
+                      <!-- ============================================================== -->
+                  </div>
+                  <!-- ============================================================== -->
+                  <!-- End Container fluid  -->
+                  <!-- ============================================================== -->
+              </div>
+              <!-- ============================================================== -->
+              <!-- End Page wrapper  -->
+              <!-- ============================================================== -->
+              <!-- ============================================================== -->
+            
+              {% endblock %}

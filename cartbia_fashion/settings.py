@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,10 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-p9&v4dk3h70ua2exx^%1p#!!63crfp&60r_kb*non$=0p1)=8g'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG',default=True , cast=bool)#True
 
 ALLOWED_HOSTS = []
 
@@ -86,11 +87,11 @@ AUTH_USER_MODEL = 'accounts.Account'
 DATABASES =  {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cartbiafz', 
-        'USER': 'postgres', 
-        'PASSWORD': 'cartbia',
-        'HOST': '127.0.0.1', 
-        'PORT': '5432',
+        'NAME': config('DB_NAME'), 
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'), 
+        'PORT': config('DB_PORT'),
     }
 }
 
@@ -143,13 +144,17 @@ MEDIA_ROOT = BASE_DIR/'media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_TOKEN = '3945443496908a9e92f515f9dc5587d6'
-ACCOUNT_SID = 'ACf543f0b46bd738974fc5aed594c0f3ea'
-SERVICES_ID =  'VA319736ac494d28f8a78bcd9c113b43df'
-
+AUTH_TOKEN=config('AUTH_TOKEN')
+ACCOUNT_SID=config('ACCOUNT_SID')
+SERVICES_ID=config('SERVICES_ID')
 #SMTP
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'cartbia369@gmail.com'
-EMAIL_HOST_PASSWORD = 'rpwpknagazjfmbhh'
-EMAIL_USE_TLS = True
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT',cast=int)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS',cast=bool)
+
+#payment
+
+RAZORPAY_ID = config('RAZORPAY_ID')
+RAZORPAY_KEY = config('RAZORPAY_KEY')

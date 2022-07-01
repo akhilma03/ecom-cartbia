@@ -12,7 +12,8 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/favicon.png' %}">
-    <title>Elite Admin Template - The Ultimate Multipurpose admin template</title>
+    <title>Cartbia </title>
+    
     <!-- chartist CSS -->
     <link href="{% static 'css/pages/ecommerce.css' %} " rel="stylesheet">
     <!-- Custom CSS -->
@@ -32,7 +33,7 @@
     <div class="preloader">
         <div class="loader">
             <div class="loader__figure"></div>
-            <p class="loader__label">Elite admin</p>
+            <p class="loader__label"> Cartbia </p>
         </div>
     </div>
     <!-- ============================================================== -->
@@ -48,20 +49,20 @@
                 <!-- Logo -->
                 <!-- ============================================================== -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="{% url 'dashboard' %}">
                         <!-- Logo icon --><b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="{% static 'assets/images/logo-icon.png' %}" alt="homepage" class="dark-logo" />
+                          <img class=" mx-5"  src ="{% static 'images/loho.jpg' %}" style="height:5rem ;" alt="homepage" class="dark-logo" /> 
                             <!-- Light Logo icon -->
-                            <img src="{% static 'assets/images/logo-light-icon.png' %}" alt="homepage" class="light-logo" />
+                            <!-- <img src="{% static 'images/loho.jpg' %}" style="height:5rem ;"alt="homepage" class="light-logo" /> -->
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text --><span>
                          <!-- dark Logo text -->
-                         <img src="{% static 'assets/images/logo-text.png' %}" alt="homepage" class="dark-logo" />
+                         <!-- <img src="{% static 'images/loho.jpg' %}" style="height:5rem ;" alt="homepage" class="dark-logo" /> -->
                          <!-- Light Logo text -->    
-                         <img src="{% static 'assets/images/logo-light-text.png' %}" class="light-logo" alt="homepage" /></span> </a>
+                         <!-- <img src="{% static 'images/loho.jpg' %}" style="height:5rem ;" class="light-logo" alt="homepage" /></span> </a> -->
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->
@@ -78,13 +79,14 @@
                         <!-- Search -->
                         <!-- ============================================================== -->
                         <li class="nav-item">
-                            <form class="app-search d-none d-md-block d-lg-block">
-                                <input type="text" class="form-control" placeholder="Search & enter">
-                            </form>
+                            <form method="GET" class="app-search d-none d-md-block d-lg-block">
+                                <input type="text" class="form-control" placeholder="Search & enter"  name ="keyword">
+                          
+                            </form type ='submit'>
                         </li>
                     </ul>
                     <!-- ============================================================== -->
-                    <!-- User profile and search -->
+                    <!-- User profile and search --> 
                     <!-- ============================================================== -->
                     <ul class="navbar-nav my-lg-0">
                         <!-- ============================================================== -->
@@ -150,22 +152,13 @@
                     <div class="user-pro-body">
                         <div><img src="{% static 'assets/images/users/2.jpg' %}" alt="user-img" class="img-circle"></div>
                         <div class="dropdown">
-                            <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Steave Gection <span class="caret"></span></a>
+                            <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Akhil M A <span class="caret"></span></a>
                             <div class="dropdown-menu animated flipInY">
                                 <!-- text-->
-                                <a href="javascript:void(0)" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
-                                <!-- text-->
-                                <a href="javascript:void(0)" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>
-                                <!-- text-->
-                                <a href="javascript:void(0)" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
-                                <!-- text-->
+                            
                                 <div class="dropdown-divider"></div>
                                 <!-- text-->
-                                <a href="javascript:void(0)" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
-                                <!-- text-->
-                                <div class="dropdown-divider"></div>
-                                <!-- text-->
-                                <a href="login.html" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
+                                <a href="{% url 'adminlogout' %}" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
                                 <!-- text-->
                             </div>
                         </div>
@@ -180,52 +173,26 @@
                         <li class="nav-small-cap">--- PERSONAL</li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Ecommerce <span class="badge badge-pill badge-cyan ml-auto">4</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="index.html">Dashboard </a></li>
-                                <li><a href="eco-products.html">Products</a></li>
-                                <li><a href="eco-products-detail.html">Products Details</a></li>
-                                <li><a href="eco-products-edit.html">Products Edit</a></li>
-                                <li><a href="eco-products-orders.html">Products Orders</a></li>
-                                <li><a href="eco-products-cart.html">Products Cart</a></li>
-                                <li><a href="eco-products-checkout.html">Products Cehckout</a></li>
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-layout-grid2"></i><span class="hide-menu">Apps</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="app-calendar.html">Calendar</a></li>
-                                <li><a href="app-chat.html">Chat app</a></li>
-                                <li><a href="app-ticket.html">Support Ticket</a></li>
-                                <li><a href="app-contact.html">Contact / Employee</a></li>
-                                <li><a href="app-contact2.html">Contact Grid</a></li>
-                                <li><a href="app-contact-detail.html">Contact Detail</a></li>
+                                <li><a href="{% url 'dashboard' %}">Dashboard </a></li>
+                                <li><a href="{% url 'User' %}">User Details</a></li>
+                                <li><a href="{% url 'product' %}">Products</a></li>
+                        
+                                <li><a href="{% url 'productdetails' %}">Products Details</a></li>
+                                <li><a href="{% url 'category' %}">Category</a></li>
+                                <li><a href="{% url 'subcategory' %}">Sub Category</a></li>
+                                <li><a href="{% url 'variationz' %}">Variations</a></li>
+                                <li><a href="{% url 'orders' %}">Order</a></li>
+                              
+                                <li><a href="{% url 'banners' %}">Banners</a></li>
+                                <li><a href="{% url 'coupon' %}">Coupon</a></li>
+                                <li><a href="{% url 'filter_price' %}">Filter Price </a></li>
+
+                   
                             </ul>
                         </li>
                        
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-palette"></i><span class="hide-menu">Ui Elements <span class="badge badge-pill badge-primary text-white ml-auto">25</span></span></a>
-                          
-                        </li>
-                        <li class="nav-small-cap">--- FORMS, TABLE &amp; WIDGETS</li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-layout-media-right-alt"></i><span class="hide-menu">Forms</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="form-basic.html">Basic Forms</a></li>
-                                <li><a href="form-layout.html">Form Layouts</a></li>
-                                <li><a href="form-addons.html">Form Addons</a></li>
-                                <li><a href="form-material.html">Form Material</a></li>
-                                <li><a href="form-float-input.html">Floating Lable</a></li>
-                                <li><a href="form-pickers.html">Form Pickers</a></li>
-                                <li><a href="form-upload.html">File Upload</a></li>
-                                <li><a href="form-mask.html">Form Mask</a></li>
-                                <li><a href="form-validation.html">Form Validation</a></li>
-                                <li><a href="form-dropzone.html">File Dropzone</a></li>
-                                <li><a href="form-icheck.html">Icheck control</a></li>
-                                <li><a href="form-img-cropper.html">Image Cropper</a></li>
-                                <li><a href="form-bootstrapwysihtml5.html">HTML5 Editor</a></li>
-                                <li><a href="form-typehead.html">Form Typehead</a></li>
-                                <li><a href="form-wizard.html">Form Wizard</a></li>
-                                <li><a href="form-xeditable.html">Xeditable Editor</a></li>
-                                <li><a href="form-summernote.html">Summernote Editor</a></li>
-                                <li><a href="form-tinymce.html">Tinymce Editor</a></li>
-                            </ul>
-                        </li>
+                       
+                       
                      
                         
                        
@@ -244,6 +211,7 @@
         </aside>
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- end  -->
 
 
     {% block content %}

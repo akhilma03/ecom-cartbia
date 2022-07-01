@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="row p-4 gap-2">
+   
+    <div class="col shadow rounded-4 bg-body p-3">
+    <div class="" id="container" style="width: 100%;">
+    <canvas id="order-chart"></canvas>
+    <strong> Orders : {{number_orders}} </strong>
+    </div>
+    </div>
+   
+    </div>
+    
+   
+    </div>
+
+
+    # total revenue in rupee
+    total_revenue = 0
+    orders_withoutcancel = Order.objects.exclude(shipping_status='Cancelled')
+    for order in orders_withoutcancel:
+        total_revenue += order.order_total
+    # locale.setlocale(locale.LC_MONETARY,'en_IN')
+    # total_revenue_rupee = locale.currency(total_revenue, grouping=True)
+
+
+
+    <!-- 12 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      
+                <script type="text/javascript">
+
+                    const labels = {{monthNumber|safe}} ;
+                    const data = {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Orders by Month',
+                            backgroundColor: 'rgb(255, 99, 132)',
+                            borderColor: 'rgb(255, 99, 132)',
+                            data: {{totalOrders|safe}},
+                        }]
+                    };
+                    const config = {
+                        type: 'bar',
+                        data: data,
+                        options: {}
+                    };
+                    const myChart = new Chart(
+                        document.getElementById('myChart'),
+                        config
+                    );
+                </script>
+
+                <script type="text/javascript">
+
+                    const labels = {{Number|safe}} ;
+                    const data = {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Orders by Month',
+                            backgroundColor: 'rgb(255, 99, 132)',
+                            borderColor: 'rgb(255, 99, 132)',
+                            data: {{Orders|safe}},
+                        }]
+                    };
+                    const config = {
+                        type: 'bar',
+                        data: data,
+                        options: {}
+                    };
+                    const myChart = new Chart(
+                        document.getElementById('Chart'),
+                        config
+                    );
+                </script> 
+
+
+                

@@ -1,0 +1,113 @@
+{% extends 'adminz/base1.html' %}
+
+{% load static %}
+
+{% block content %}
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="row page-titles">
+            <div class="col-md-5 align-self-center">
+                <h4 class="text-themecolor">Order</h4>
+            </div>
+
+            <div class="col-md-7 align-self-center text-right">
+                <div class="d-flex justify-content-end align-items-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active">Basic Form</li>
+                    </ol>
+                    <button type="button" class="btn btn-info d-none d-lg-block m-l-15"><i
+                            class="fa fa-plus-circle"></i> Create New</button>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        
+
+        <form action="" method="POST">
+            {% csrf_token %}
+
+            <div class="container">
+                <div class="row">
+                    <div class="signup-content">
+                        <form method="" id="signup-form" class="signup-form">
+
+                            <h2 class="form-title">Discount</h2>
+                            <div class="col form-group">
+                                <label> Coupon</label><br>
+                                {{form.code}}
+                            </div>
+                           
+                            <div class="col form-group">
+                                <label> Discount_Percentage </label><br>
+                                {{form.discount_percentage}}
+                            </div>
+                            <div class="col form-group">
+                                <label>Discount_From</label><br>
+                                {{form.discount_from}}
+                            </div>
+                            <div class="col form-group">
+                                <label>Is active</label><br>
+                                {{form.is_active}}
+                            </div>
+
+
+
+
+                            <div class="col form-group">
+                                <a href=""> <input class="btn btn-dark" type="submit" name="submit" id="submit" class="form-submit" value="Save"/></a>
+                             </div>
+                         </form>
+                        </form>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+     
+
+        <!-- row -->
+        <!-- .row -->
+
+        <!-- Row -->
+        <!-- ============================================================== -->
+        <!-- End Page Content -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Right sidebar -->
+        <!-- ============================================================== -->
+        <!-- .right-sidebar -->
+
+        <!-- ============================================================== -->
+        <!-- End Right sidebar -->
+
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+{% endblock %}
