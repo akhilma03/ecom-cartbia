@@ -19,7 +19,7 @@ from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
 from django.core.paginator import Paginator
-
+from adminz.urls import *
 
 # Create your views here.
 
@@ -32,8 +32,10 @@ def userlogin(request):
 
         if user is not None:
             if user.is_superadmin:
+                auth.login(request, user)
+                
                 messages.error(request,'You have no Permission')
-                return redirect ('userlogin')
+                return redirect ('dashboard')
             else:    
         
                 try:
