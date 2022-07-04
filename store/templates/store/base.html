@@ -49,6 +49,7 @@
             <div class="offcanvas__links">
                 {% if user.is_authenticated %}
                 <span>{{user.email}} </span>
+                <a href="{% url 'userprofile' %}">My Accounts</a>
                 <a href="{% url 'userlogout' %}">Log Out</a>
                 {% else%}
                 <a href="/account/login/">Sign in</a>
