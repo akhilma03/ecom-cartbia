@@ -55,7 +55,7 @@ def shop(request, category_slug=None, subcategory_slug=None):
 
          #
         if 'sorting' not in request.POST: 
-            if request.method ==  'POST':
+            if request.method =='POST':
                 print('212222222')
                 sort = request.POST['filtering']
                 key = Filter_Price.objects.get(name=sort)
@@ -77,7 +77,7 @@ def shop(request, category_slug=None, subcategory_slug=None):
             paged_products = paginator.get_page(page)
             # subcategory_count= products.count()
             if 'filtering'  not in request.POST: 
-                if request.method == 'POST':
+                if request.method =='POST':
                     sort_id = request.POST['sorting']
 
                     if sort_id == 'low':

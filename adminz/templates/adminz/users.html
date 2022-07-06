@@ -8,6 +8,7 @@
 <!-- Page wrapper  -->
 <!-- ============================================================== -->
 <div class="page-wrapper">
+  
 <!-- ============================================================== -->
 <!-- Container fluid  -->
 <!-- ============================================================== -->
@@ -88,7 +89,8 @@
                                                     <td><a href="{% url 'BlockUser' user.id %}"><button  class="btn btn-danger"><span class="label label-danger">Unblock </span></button></a></td>
                                                     {% endif %}
                                                     <td>
-                                                        <div class="pro-img-overlay"><a href="{% url 'addAdmin' user.id  %}"  class="ti-marker-alt" style="font-size:20px"> </a></i></a> </div>
+                                                    
+                                                         <div class="pro-img-overlay"><a href="{% url 'addAdmin' user.id  %}"   > <i class="fa-solid fa-pen-to-square"></i></a> </div> 
                                                     </td>
                                                 </tr>
                                             

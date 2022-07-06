@@ -63,9 +63,9 @@
         </div>
         <div class="offcanvas__nav__option">
             
-            <a href="#" class="search-switch"><img src="{% static 'images/icon/search.png' %}" alt=""></a>
-            <a href="#"><img src="{% static 'images/icon/heart.png' %}" alt=""></a>
-            <a href="#"><img src="{% static 'images/icon/cart.png' %}" alt=""> <span>0</span></a>
+            <a href="#" class="search-switch" name = "keyword" ><img src="{% static 'images/icon/search.png' %}" alt=""></a>
+            <a href="{% url 'wishlist' %}"><img src="{% static 'images/icon/heart.png' %}" alt=""></a>
+            <a href="{% url 'cart' %}"><img src="{% static 'images/icon/cart.png' %}" alt=""> <span>0</span></a>
             <div class="price">$0.00</div>
         </div>
         <div id="mobile-menu-wrap"></div>
@@ -90,7 +90,7 @@
                             
                             {% if user.is_authenticated %}
                             <div class="header__top__hover">
-                                <span>{{user.email}} <i class="arrow_carrot-down"></i></span>
+                                <span>{{user.email}} </span>
                                 <ul>
                                     <li>
                                        <a href="{% url 'userprofile' %}"> <h5>My Account</h5></a>
