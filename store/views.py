@@ -58,9 +58,9 @@ def shop(request, category_slug=None, subcategory_slug=None):
             if request.method =='POST':
                 print('212222222')
                 sort = request.POST['filtering']
-                key = Filter_Price.objects.get(name=sort)
+                key = Filter_Price.objects.get(name = sort)
                 a = key.pricerange_from
-                b=key.pricerange_to
+                b = key.pricerange_to
                 products= Product.objects.filter(category=categories,price__range=(a,b))
                 paginator = Paginator(products, 4)
                 page = request.GET.get('page')
@@ -114,16 +114,18 @@ def shop(request, category_slug=None, subcategory_slug=None):
         product_count = products.count()
 
         if 'filtering' in request.POST:
-            
             if request.method == 'POST':
-                    sort = request.POST['filtering']
-                    key = Filter_Price.objects.get(name=sort)
-                    a = key.pricerange_from
-                    b=key.pricerange_to
-                    product= Product.objects.filter(sub_category=subcategories,price__range=(a,b))
-                    paginator = Paginator(product, 4)
-                    page = request.GET.get('page')
-                    paged_products = paginator.get_page(page)    
+                
+                sort =request.POST['filtering']
+                key = Filter_Price.objects.get(name=sort)
+                a = key.pricerange_from
+                b=key.pricerange_to
+                print(b)
+                product= Product.objects.filter(price__range=(a,b))
+                print(product)
+                paginator = Paginator(product, 4)
+                page = request.GET.get('page')
+                paged_products = paginator.get_page(page)    
 
 
         if 'filtering' not in request.POST:
@@ -150,7 +152,7 @@ def shop(request, category_slug=None, subcategory_slug=None):
         'product_count': product_count,
         'subcategories': subcategories,
         'categories': categories,
-       'filter':filter,
+        'filter':filter,
 
     }
     return render(request, 'store/shop.html', context)
