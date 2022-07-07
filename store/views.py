@@ -545,7 +545,8 @@ def checkout(request, total=0, quantity=0, cart_items=None):
 
 def contact(request):
     return render(request,'store/contact.html')
-
+    
+@login_required(login_url='userlogin')
 def Wishlist(request):
     wlist = wishlist.objects.filter(user=request.user)
 
@@ -554,7 +555,7 @@ def Wishlist(request):
     }
     return render(request,'store/wishlist.html',context)
 
-
+@login_required(login_url='userlogin')
 def addwish(request,id):
     product = Product.objects.get(id=id)
 
@@ -566,7 +567,7 @@ def addwish(request,id):
         wish.product = product
         wish.save()
     return redirect ('shop')
-
+@login_required(login_url='userlogin')
 def removewish(request,id):
     wish = wishlist.objects.get(id=id)
     wish.delete()
