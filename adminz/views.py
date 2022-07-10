@@ -396,7 +396,7 @@ def Orderz(request):
     if 'keyword' in request.GET:
             keyword = request.GET['keyword']
             if keyword:
-                order=Order.objects.filter(Q(order_number__icontains=keyword) | Q(user__first_name__icontains=keyword))
+                order=Order.objects.filter(Q(order_number__icontains=keyword) | Q(user__first_name__icontains=keyword) |  Q(status__icontains=keyword))
 
     
     paginator =  Paginator(order,6)
